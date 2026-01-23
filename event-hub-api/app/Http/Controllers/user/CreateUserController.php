@@ -6,10 +6,9 @@ use App\Entities\User as EntitiesUser;
 use App\UseCases\CreateUserUseCase;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\user\userCreateUserRequest;
-use App\Models\User;
 
-use Illuminate\Http\Request;
-use UserEntity;
+
+
 
 class CreateUserController extends Controller
 {

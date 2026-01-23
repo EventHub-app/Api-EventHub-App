@@ -3,29 +3,41 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Infra as RepositoriesCreateUserRepositoryImp;
+
 use App\Repositories\UserCreateRepository as RepositoriesUserCreateRepository;
+use App\Repositories\CreateUserRepositoryImp;
+use App\Repositories\LoginRepository;
+use App\Repositories\LoginRepositoryImp;
+
 use App\UseCases\CreateUserUseCase;
+use App\UseCases\LoginUseCase as UseCasesLoginUseCase;
+use App\UseCases\LoginUseCaseImp;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        // Bind da interface para implementação
-        $this->app->bind(RepositoriesUserCreateRepository::class, RepositoriesCreateUserRepositoryImp::class);
+        // conexão para criar usuário
+        $this->app->bind(
+            RepositoriesUserCreateRepository::class,
+            CreateUserRepositoryImp::class
+        );
 
-      
-        $this->app->bind(CreateUserUseCase::class, function($app){
-            return new CreateUserUseCase($app->make(RepositoriesUserCreateRepository::class));
+        $this->app->bind(CreateUserUseCase::class, function ($app) {
+            return new CreateUserUseCase(
+                $app->make(RepositoriesUserCreateRepository::class)
+            );
         });
+
+        // conexão para login
+        $this->app->bind(LoginRepository::class, LoginRepositoryImp::class);
+
+        $this->app->bind(
+            UseCasesLoginUseCase::class,
+            LoginRepositoryImp::class
+        );
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         //
