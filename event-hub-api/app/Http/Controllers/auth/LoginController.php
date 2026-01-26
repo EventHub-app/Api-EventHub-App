@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\auth;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\auth\loginRequest;
+use App\Http\Resources\UserResource;
 use Exception;
 use App\UseCases\LoginUseCase;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LoginController extends Controller
 {
@@ -17,8 +20,10 @@ class LoginController extends Controller
      {
           try {
                $userAuthed = $this->loginUsecase->execute($request);
+               $token = JWTAuth::fromUser($userAuthed);
                return response()->json([
-                    "data" => $userAuthed
+                    "token" =>   $token,
+                    "data" => new UserResource($userAuthed  )
                ]);
           } catch (Exception $e) {
                return   response()->json([

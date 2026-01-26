@@ -19,6 +19,9 @@ class LoginRepositoryImp implements LoginRepository
 
       return $useCheckinExistences;
     }
-    throw new ErrorCustomMessage("User Doesn´t Exists", 404);
+    throw new ErrorCustomMessage(
+      "User not Founded",
+      404
+    );
   }
 }

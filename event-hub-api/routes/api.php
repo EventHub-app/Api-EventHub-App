@@ -14,3 +14,4 @@ Route::get("/", function () {
 
 require_once __DIR__ ."/user/user_routes.php";
 require_once __DIR__ . "/auth/auth_routes.php";
+require_once __DIR__ . "/services/service_routes.php";
