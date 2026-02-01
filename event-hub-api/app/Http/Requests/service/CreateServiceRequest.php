@@ -43,7 +43,7 @@ class CreateServiceRequest extends FormRequest
                 "required"
             ],
             "image_path" => [
-                "string",
+                "file:png,jpeg,",
                 "required"
             ],
 

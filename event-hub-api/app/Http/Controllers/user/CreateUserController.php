@@ -4,9 +4,9 @@ namespace App\Http\Controllers\user;
 
 use App\Entities\User as EntitiesUser;
 use App\Http\Resources\user\UserResource;
-use App\UseCases\CreateUserUseCase;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\user\userCreateUserRequest;
+use App\UseCases\CreateUserUseCase;
 
 
 
